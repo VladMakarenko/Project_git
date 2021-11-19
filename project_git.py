@@ -34,5 +34,39 @@ def draw():
         print(result)
         y += 1
 
+def press_instruction(key):
+    global racket1Y, racket2Y
+    if key == pynput.keyboard.KeyCode.from_char('w'):
+        racket1Y -= 1
+        if racket1Y == 0:
+            racket1Y += 1
+    elif key == pynput.keyboard.KeyCode.from_char('s'):
+        racket1Y += 1
+        if racket1Y == height - 2:
+            racket1Y -= 1
+    if key == pynput.keyboard.Key.down:
+        racket2Y += 1
+        if racket2Y == height - 2:
+            racket2Y -= 1
+    elif key == pynput.keyboard.Key.up:
+        racket2Y -= 1
+        if racket2Y == 0:
+            racket2Y += 1
 
-draw()
+def release_instruction(key):
+    print(key)
+
+pynput.keyboard.Listener(
+    on_press=press_instruction,
+    on_release=release_instruction
+).start()
+
+while True:
+    ballX += ballDirX
+    ballY += ballDirY
+
+
+
+    os.system('cls')
+    draw()
+    time.sleep(0.1)
