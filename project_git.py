@@ -65,7 +65,20 @@ while True:
     ballX += ballDirX
     ballY += ballDirY
 
-
+    if round(ballY) == height - 1:
+        ballDirY *= -1
+    if round(ballY) == 0:
+        ballDirY *= -1
+    if round(ballX) == width - 1:
+        if round(ballY) >= racket2Y and round(ballY) < racket2Y + round(racketLenght):
+            ballDirX *= -1
+        else:
+            quit("player 2 lose")
+    if round(ballX) == 0:
+        if round(ballY) >= racket1Y and round(ballY) < racket1Y + round(racketLenght):
+            ballDirX *= -1
+        else:
+            quit("player 1 lose")
 
     os.system('cls')
     draw()
